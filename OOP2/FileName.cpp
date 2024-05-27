@@ -32,6 +32,20 @@ class Car {
 			price = Price;
 		}
 
+		Car(const Car& first_car) {//Конструктор копирования
+			model = new char[strlen(first_car.model) + 1];
+			strcpy_s(model, strlen(first_car.model) + 1, first_car.model);
+
+			country = new char[strlen(first_car.country) + 1];
+			strcpy_s(country, strlen(first_car.country) + 1, first_car.country);
+
+			color = new char[strlen(first_car.color) + 1];
+			strcpy_s(color, strlen(first_car.color) + 1, first_car.color);
+
+			year = first_car.year;
+			price = first_car.price;
+		}
+
 		void Model() {//Метод инициализации модели
 			cout << "Enter model: ";
 			char* Model = new char[10];
@@ -75,6 +89,7 @@ class Car {
 		}
 
 		~Car() {//Деструктор
+			cout << "Destructor" << endl;
 			delete[] model;
 			delete[] country;
 			delete[] color;
@@ -91,6 +106,11 @@ int main() {
 	first_car.Color();
 	first_car.Year();
 	first_car.Price();
+	cout << endl;
+	first_car.Show();//Вывод всех полей
+	cout << endl;
 
-	first_car.Show();//Вывод все полей
+
+	Car second_car = first_car;
+	second_car.Show();//Инициализация одного обьекта другим в момент создания
 }
